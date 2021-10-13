@@ -29,3 +29,7 @@ GENERATE_IMAGES = True
 GENERATE_METADATA = True
 
 CLEAN_UP_BEFORE_GENERATE = True
+
+EDITION = 1
+
+EXTERNAL_URL = 'https://nft.anothernow.io/nft/filemon'

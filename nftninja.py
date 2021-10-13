@@ -3,9 +3,10 @@ import os, json
 import random
 import hashlib
 import shutil
+from time import strftime, gmtime
 from config import nucleotides, colors, AVAILABLE_COLORS, ITEM_NAME, IMAGE_SIZE
 from config import MAX_ITEMS_TO_GENERATE, GENERATE_METADATA, GENERATE_IMAGES
-from config import CLEAN_UP_BEFORE_GENERATE
+from config import CLEAN_UP_BEFORE_GENERATE, EXTERNAL_URL, EDITION
 
 
 nucleotide_options = {nucl: [os.path.splitext(x)[0] for x in os.listdir('./layers/single/' + nucl)] for nucl in nucleotides if nucl != 'color'}
@@ -42,13 +43,15 @@ def generate_metadata(id, dna):
     for d in dna:
         attributes.append({'trait_type': d, 'value': dna[d]})
 
+    date = strftime("%Y-%m-%d %H:%M:%S", gmtime())
+
     metadata = {
         'dna': hash_dna(dna),
         'name': f'{ITEM_NAME} #{id}',
         'description': "Schrödinger's cat who wants to live",
-        'image': 'ipfs://NewUriToReplace/1.png',
-        'edition': 1,
-        'date': '2021-10-13',
+        'image': f'{EXTERNAL_URL}/images/{id}.png',
+        'edition': f'{EDITION}',
+        'date': f'{date}',
         'attributes': attributes,
         'engine': 'NFTNinja v0.1'
     }
