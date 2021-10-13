@@ -31,8 +31,8 @@ def build_image(id, sprite_config):
         next_image = Image.open(sprite[1])
         base_image.paste(next_image, (0, 0), next_image)
     result = base_image.resize(IMAGE_SIZE)
-    print(f"./build/{ITEM_NAME}-{id}.png")
-    result.save(f"./build/images/{ITEM_NAME}-{id}.png")
+    print(f"./build/images/{id}.png")
+    result.save(f"./build/images/{id}.png")
 
 
 def hash_dna(dna):
@@ -84,7 +84,7 @@ if __name__ == "__main__":
         else:
             existing_dna_hashes.append(h)
             dnas.append(dnax)
-    for idx, dd in enumerate(dnas):
+    for idx, dd in enumerate(dnas, start=1):
         if GENERATE_METADATA:
             metadata = generate_metadata(idx, dd)
             with open(f'build/metadata/{idx}.json', 'w', encoding='utf-8') as f:
