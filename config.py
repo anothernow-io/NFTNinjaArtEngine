@@ -33,3 +33,5 @@ CLEAN_UP_BEFORE_GENERATE = True
 EDITION = 1
 
 EXTERNAL_URL = 'https://nft.anothernow.io/nft/filemon'
+
+RARITY_JSON_NAME = 'rarity-config.json'
