@@ -98,3 +98,22 @@ class Manager:
             if self.config.GENERATE_IMAGES:
                 scf = self.generate_sprite_config(dd)
                 self.build_image(idx, scf)
+
+    def generate_rarity_config(self):
+        print("Generating rarity configuration")
+        rarity_config = {}
+        for nucleotide in self.nucleotide_options:
+            rarity_config[nucleotide] = {}
+            for gene in self.nucleotide_options[nucleotide]:
+                rarity_config[nucleotide][gene] = 1
+
+        with open(f'rarity-configuration.json', 'w', encoding='utf-8') as f:
+            json.dump(rarity_config, f, ensure_ascii=False, indent=4)
+        print("Done...")
+
+    def count_all_possibilities(self):
+        """
+        self.rarity_sprite_counts = [len(os.listdir(self.config.RARITY_LAYERS_FOLDER + '/' + i)) for i in self.config.LAYER_CONFIGURATIONS["rarity_layers"]]
+        self.max_possible_combinations = math.prod(self.rarity_sprite_counts)
+        """
+        print(10)
