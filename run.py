@@ -1,5 +1,5 @@
 import argparse
-from nftninja.manager import Manager
+from artengine.manager import Manager
 import config
 
 
