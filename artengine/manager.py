@@ -98,6 +98,7 @@ class Manager:
             else:
                 self.existing_dna_hashes.append(h)
                 self.dnas.append(dnax)
+        print(f'Will generate {len(self.dnas)} art pieces.')
 
     def generate_rarity_config(self):
         print("Generating rarity configuration")
