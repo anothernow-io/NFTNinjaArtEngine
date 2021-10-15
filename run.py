@@ -5,6 +5,7 @@ import config
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
+    parser.add_argument("-i", "--init", dest="init", action='store_true', help="Gegerate build folder")
     parser.add_argument("-e", "--edition", dest="edition", type=int, help="Edition number", default=1)
     parser.add_argument("-in", "--item-name", dest="item_name", help="Name of the items in metadata JSON", default="AgentFUD")
     parser.add_argument("-imax", "--items-max-number", dest="imax", type=int, help="Maximum number of items to generate", default=5)
@@ -27,11 +28,14 @@ if __name__ == "__main__":
     config.GENERATE_IMAGES = args.build_images
     config.GENERATE_METADATA = args.build_metadata
     config.EXTERNAL_URL = args.external_url if args.external_url is not None else config.EXTERNAL_URL
+    config.CLEAN_UP_BEFORE_GENERATE = args.init if args.init else config.CLEAN_UP_BEFORE_GENERATE
     
     print(args)
     m = Manager(config)
     
-    if args.generate_rarity_config:
+    if args.init:
+        m.init_before_generate()
+    elif args.generate_rarity_config:
         m.generate_rarity_config()
     elif args.count_all_possibilities:
         m.count_all_possibilities()
