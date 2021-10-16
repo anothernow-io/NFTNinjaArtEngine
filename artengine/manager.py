@@ -3,6 +3,8 @@ from PIL import Image
 from typing import List
 from time import strftime, gmtime
 import random
+import math
+
 
 class Manager:
     def __init__(self, config) -> None:
@@ -11,6 +13,8 @@ class Manager:
         self.existing_dna_hashes = []
         self.nucleotide_options = {nucl: [os.path.splitext(x)[0] for x in os.listdir('./layers/single/' + nucl)] for nucl in self.config.nucleotides if nucl != 'color'}
         self.nucleotide_options['color'] = self.config.AVAILABLE_COLORS
+        self.rarity_sprite_counts = []
+        self.max_possible_combinations = 0
 
     def init_before_generate(self):
         if not self.config.CLEAN_UP_BEFORE_GENERATE:
@@ -113,7 +117,10 @@ class Manager:
         print("Done...")
 
     def count_all_possibilities(self):
-        pass
+        self.rarity_sprite_counts = [len(os.listdir('./layers/single/' + name)) for name in self.config.nucleotides if name != 'color']
+        self.rarity_sprite_counts.append(len(self.config.AVAILABLE_COLORS))
+        self.max_possible_combinations = math.prod(self.rarity_sprite_counts)
+        print(f"Current configuraion allows you to generate maximum {self.max_possible_combinations} art pieces")
 
     def check_rarities(self):
         pass
